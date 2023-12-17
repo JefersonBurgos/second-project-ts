@@ -1,4 +1,3 @@
-import "./styles.css"
 import React from "react";
 
 import {
@@ -43,18 +42,18 @@ function Component({
 	const [state, dispatch] = React.useReducer(reducer, initialState);
 	return (
 		<MuiBox>
-			<h1>Hi whats up</h1>
+			
 		</MuiBox>
 	);
 }
 
-export type AppState = State;
-export type AppAction = Action;
-export type AppContextValue = ContextValue;
-export type AppProperties = Properties;
-export const App = Object.assign(Component, {
+export type TemplateState = State;
+export type TemplateAction = Action;
+export type TemplateContextValue = ContextValue;
+export type TemplateProperties = Properties;
+export const Template = Object.assign(Component, {
 	initialState,
 	reducer
 });
 
-export default App;
+export default Template;

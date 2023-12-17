@@ -48,13 +48,13 @@ function Component({
 	);
 }
 
-export type AppState = State;
-export type AppAction = Action;
-export type AppContextValue = ContextValue;
-export type AppProperties = Properties;
-export const App = Object.assign(Component, {
+export type TodoItemState = State;
+export type TodoItemAction = Action;
+export type TodoItemContextValue = ContextValue;
+export type TodoItemProperties = Properties;
+export const TodoItem = Object.assign(Component, {
 	initialState,
 	reducer
 });
 
-export default App;
+export default TodoItem;

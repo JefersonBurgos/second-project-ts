@@ -48,13 +48,13 @@ function Component({
 	);
 }
 
-export type AppState = State;
-export type AppAction = Action;
-export type AppContextValue = ContextValue;
-export type AppProperties = Properties;
-export const App = Object.assign(Component, {
+export type NewTodoFormState = State;
+export type NewTodoFormAction = Action;
+export type NewTodoFormContextValue = ContextValue;
+export type NewTodoFormProperties = Properties;
+export const NewTodoForm = Object.assign(Component, {
 	initialState,
 	reducer
 });
 
-export default App;
+export default NewTodoForm;

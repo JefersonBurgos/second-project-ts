@@ -1,62 +1,61 @@
-import React, { useReducer } from "react";
+import React from "react";
+
+import "./styles.css"
+
+import {
+	Box as MuiBox
+} from "@mui/material";
 
 interface State {
-	newItem: string;
+
 }
 
 const initialState: State = {
-	newItem: "",
+
 };
 
 type Action =
-	| { type: "SET_NEW_ITEM"; value: string }
-	| { type: "SUBMIT"; onSubmit: (value: string) => void };
+	{ type: "", payload: any }
+	;
 
 function reducer(state: State, action: Action): State {
 	switch (action.type) {
-		case "SET_NEW_ITEM":
+		case "": {
 			return {
 				...state,
-				newItem: action.value,
+
 			};
-		case "SUBMIT":
-			action.onSubmit(state.newItem);
-			return {
-				...state,
-				newItem: "",
-			};
-		default:
-			return state;
+		}
 	}
 }
 
-interface NewTodoFormProps {
-	onSubmit: (value: string) => void;
+interface ContextValue {
+	readonly state: State;
+	readonly dispatch?: (action: Action) => void;
 }
 
-export function NewTodoForm({ onSubmit }: NewTodoFormProps) {
-	const [state, dispatch] = useReducer(reducer, initialState);
+type Properties = {
 
-	function handleChange(e: React.ChangeEvent<HTMLInputElement>) {
-		dispatch({ type: "SET_NEW_ITEM", value: e.target.value });
-	}
+};
 
-	function handleSubmit(e: React.FormEvent) {
-		e.preventDefault();
-		if (state.newItem === "") return;
-		dispatch({ type: "SUBMIT", onSubmit });
-	}
+function Component({
 
+}: Properties) {
+	const [state, dispatch] = React.useReducer(reducer, initialState);
 	return (
-		<form onSubmit={handleSubmit} className="new-item-form">
-			<label htmlFor="item">New Item</label>
-			<input
-				value={state.newItem}
-				onChange={handleChange}
-				type="text"
-				id="item"
-			></input>
-			<button className="btn">Add</button>
-		</form>
+		<MuiBox>
+
+		</MuiBox>
 	);
 }
+
+export type NewTodoFormState = State;
+export type NewTodoFormAction = Action;
+export type NewTodoFormContextValue = ContextValue;
+export type NewTodoFormProperties = Properties;
+export const NewTodoForm = Object.assign(Component, {
+	initialState,
+	reducer
+});
+
+export default NewTodoForm;

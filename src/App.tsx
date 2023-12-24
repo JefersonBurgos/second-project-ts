@@ -1,10 +1,11 @@
+import React from "react";
 import "./styles.css"
 
-import React from "react";
-
 import {
-	Box as MuiBox
+	Box as MuiBox, Typography
 } from "@mui/material";
+import NewTodoForm from "./NewTodoForm";
+import TodoList from "./TodoList";
 
 interface State {
 
@@ -44,7 +45,9 @@ function Component({
 	const [state, dispatch] = React.useReducer(reducer, initialState);
 	return (
 		<MuiBox>
-
+			<Typography variant="h4">Add Todo</Typography>
+			<NewTodoForm />
+			<TodoList />
 		</MuiBox>
 	);
 }

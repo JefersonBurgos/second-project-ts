@@ -3,7 +3,8 @@ import React from "react";
 import "./styles.css"
 
 import {
-	Box as MuiBox
+	Button,
+	Box as MuiBox, Stack, TextField
 } from "@mui/material";
 
 interface State {
@@ -44,6 +45,20 @@ function Component({
 	const [state, dispatch] = React.useReducer(reducer, initialState);
 	return (
 		<MuiBox>
+			<Stack>
+				<TextField
+					fullWidth
+					id="outlined-basic"
+					label="Item"
+					variant="outlined" />
+			</Stack>
+
+			<Button
+				variant="contained"
+				fullWidth
+			>Add
+			</Button>
+
 
 		</MuiBox>
 	);

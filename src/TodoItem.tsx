@@ -2,7 +2,11 @@ import "./styles.css"
 import React from "react";
 
 import {
-	Box as MuiBox
+	Button,
+	Checkbox,
+	FormControlLabel,
+	Grid,
+	Box as MuiBox, Stack, Typography
 } from "@mui/material";
 
 interface State {
@@ -43,7 +47,39 @@ function Component({
 	const [state, dispatch] = React.useReducer(reducer, initialState);
 	return (
 		<MuiBox>
-			<h1>Hi whats up</h1>
+			<Typography variant="h5">Todo List</Typography>
+			<Grid >
+				<Grid>
+					<FormControlLabel
+						control=
+						{
+							<Checkbox
+							//checked={antoine}
+							//onChange={handleChange}
+							//name="antoine"
+							/>
+						}
+						label="Item 1"
+
+					/>
+					<Button variant="outlined" color="error">Delete</Button>
+				</Grid>
+				<Grid>
+					<FormControlLabel
+						control=
+						{
+							<Checkbox
+							//checked={antoine}
+							//onChange={handleChange}
+							//name="antoine"
+							/>
+						}
+						label="Item 2"
+
+					/>
+					<Button variant="outlined" color="error">Delete</Button>
+				</Grid>
+			</Grid>
 		</MuiBox>
 	);
 }

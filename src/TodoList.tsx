@@ -4,6 +4,7 @@ import React from "react";
 import {
 	Box as MuiBox
 } from "@mui/material";
+import TodoItem from "./TodoItem";
 
 interface State {
 
@@ -43,7 +44,7 @@ function Component({
 	const [state, dispatch] = React.useReducer(reducer, initialState);
 	return (
 		<MuiBox>
-			<h1>Hi whats up</h1>
+			<TodoItem />
 		</MuiBox>
 	);
 }

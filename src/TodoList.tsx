@@ -2,9 +2,17 @@ import "./styles.css"
 import React from "react";
 
 import {
+	List,
+	ListItem,
 	Box as MuiBox
 } from "@mui/material";
 import TodoItem from "./TodoItem";
+
+interface Todo {
+	id: string;
+	title: string;
+	completed: boolean;
+}
 
 interface State {
 
@@ -35,16 +43,22 @@ interface ContextValue {
 }
 
 type Properties = {
-
+	todo: Todo[]
 };
 
 function Component({
-
+	todo
 }: Properties) {
 	const [state, dispatch] = React.useReducer(reducer, initialState);
 	return (
 		<MuiBox>
-			<TodoItem />
+			<List>
+				<ListItem>Hola</ListItem>
+				{todo.map((todo: Todo, index: number) => (
+					<ListItem key={index}>{todo.title}</ListItem>
+				))}
+			</List>
+
 		</MuiBox>
 	);
 }

@@ -9,6 +9,12 @@ import {
 	Box as MuiBox, Stack, Typography
 } from "@mui/material";
 
+interface Todo {
+	id: string;
+	title: string;
+	completed: boolean;
+}
+
 interface State {
 
 }

@@ -22,18 +22,33 @@ const initialState: State = {
 };
 
 type Action =
-	{ type: "ADD_TODO", payload: Todo[] }
+	{ type: "ADD_TODOS", payload: Todo } |
+	{ type: "DELETE_TODO", payload: Todo[] }
 	;
 
 function reducer(state: State, action: Action): State {
+	let newState;
 	switch (action.type) {
-		case "ADD_TODO": {
-			return {
+		case "ADD_TODOS": {
+			newState = {
+				...state,
+				todos: [...state.todos, action.payload]
+			};
+			break;
+		}
+
+		case "DELETE_TODO": {
+			newState = {
 				...state,
 				todos: action.payload
 			};
+			break;
 		}
+		default:
+			newState = state;
 	}
+	console.log(newState);
+	return newState;
 }
 
 interface ContextValue {
@@ -42,19 +57,22 @@ interface ContextValue {
 }
 
 type Properties = {
-	onSubmit?: (todos: Todo[]) => void;
+
 };
 
 function Component({
-	onSubmit
+
 }: Properties) {
 	const [state, dispatch] = React.useReducer(reducer, initialState);
 
 	return (
 		<MuiBox>
 			<Typography variant="h4">Add Todo</Typography>
-			<NewTodoForm onChange={(todo: Todo[]) => dispatch({ type: "ADD_TODO", payload: todo })} />
+			<NewTodoForm
+				onChange={(todo: Todo) => dispatch({ type: "ADD_TODOS", payload: todo })}
+			/>
 			<TodoList
+				onDelete={(id: string) => dispatch({ type: "DELETE_TODO", payload: state.todos.filter(todo => todo.id != id) })}
 				todo={state.todos}
 			/>
 		</MuiBox>

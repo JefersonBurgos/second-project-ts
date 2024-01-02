@@ -9,22 +9,26 @@ interface Todo {
 }
 
 interface State {
-	todos: Todo[];
+	todo: Todo;
 }
 
 const initialState: State = {
-	todos: [],
+	todo: {
+		id: "",
+		title: "",
+		completed: false
+	}
 };
 
-type Action = { type: "ADD_TODO", payload: Todo };
+type Action = { type: "add-todo", payload: Todo };
 
 function reducer(state: State, action: Action): State {
 	let newState;
 	switch (action.type) {
-		case "ADD_TODO": {
+		case "add-todo": {
 			newState = {
 				...state,
-				todos: [...state.todos, action.payload]
+				todo: action.payload
 			};
 			break;
 		}
@@ -41,13 +45,19 @@ interface ContextValue {
 }
 
 type Properties = {
-	onChange?: (value: Todo[]) => void;
+	onChange?: (value: Todo) => void;
 };
 
 function Component({
 	onChange
 }: Properties) {
 	const [state, dispatch] = React.useReducer(reducer, initialState);
+
+	React.useEffect(() => {
+		state.todo.title !== "" &&
+			onChange?.(state.todo);
+	}, [state.todo]);
+
 	return (
 		<MuiBox>
 			<Stack
@@ -57,14 +67,13 @@ function Component({
 					event.preventDefault();
 					const title = (event.target as any).elements[0].value;
 					dispatch({
-						type: "ADD_TODO",
+						type: "add-todo",
 						payload: {
 							id: crypto.randomUUID(),
 							title,
 							completed: false,
 						},
 					});
-					onChange?.(state.todos);
 				}}
 			>
 				<TextField

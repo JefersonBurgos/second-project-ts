@@ -6,7 +6,7 @@ import {
 	Checkbox,
 	FormControlLabel,
 	Grid,
-	Box as MuiBox, Stack, Typography
+	Box as MuiBox
 } from "@mui/material";
 
 interface Todo {
@@ -32,7 +32,6 @@ function reducer(state: State, action: Action): State {
 		case "": {
 			return {
 				...state,
-
 			};
 		}
 	}
@@ -44,47 +43,35 @@ interface ContextValue {
 }
 
 type Properties = {
-
+	value: Todo,
+	onDelete: (id: string) => void
 };
 
 function Component({
-
+	value,
+	onDelete
 }: Properties) {
 	const [state, dispatch] = React.useReducer(reducer, initialState);
 	return (
 		<MuiBox>
-			<Typography variant="h5">Todo List</Typography>
-			<Grid >
-				<Grid>
-					<FormControlLabel
-						control=
-						{
-							<Checkbox
-							//checked={antoine}
-							//onChange={handleChange}
-							//name="antoine"
-							/>
-						}
-						label="Item 1"
-
-					/>
-					<Button variant="outlined" color="error">Delete</Button>
-				</Grid>
-				<Grid>
-					<FormControlLabel
-						control=
-						{
-							<Checkbox
-							//checked={antoine}
-							//onChange={handleChange}
-							//name="antoine"
-							/>
-						}
-						label="Item 2"
-
-					/>
-					<Button variant="outlined" color="error">Delete</Button>
-				</Grid>
+			<Grid>
+				<FormControlLabel
+					control=
+					{
+						<Checkbox
+							//onChange={ }
+							name={value.title}
+						/>
+					}
+					label={value.title}
+				/>
+				<Button
+					variant="outlined"
+					color="error"
+					onClick={() => onDelete(value.id)}
+				>
+					Delete
+				</Button>
 			</Grid>
 		</MuiBox>
 	);

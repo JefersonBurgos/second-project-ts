@@ -2,9 +2,11 @@ import "./styles.css"
 import React from "react";
 
 import {
+	Grid,
 	List,
 	ListItem,
-	Box as MuiBox
+	Box as MuiBox,
+	Typography
 } from "@mui/material";
 import TodoItem from "./TodoItem";
 
@@ -43,22 +45,23 @@ interface ContextValue {
 }
 
 type Properties = {
-	todo: Todo[]
+	todo: Todo[],
+	onDelete: (id: string) => void
 };
 
 function Component({
-	todo
+	todo,
+	onDelete
 }: Properties) {
 	const [state, dispatch] = React.useReducer(reducer, initialState);
 	return (
 		<MuiBox>
-			<List>
-				<ListItem>Hola</ListItem>
+			<Typography variant="h5">Todo List</Typography>
+			<Grid >
 				{todo.map((todo: Todo, index: number) => (
-					<ListItem key={index}>{todo.title}</ListItem>
+					<TodoItem key={index} value={todo} onDelete={onDelete} />
 				))}
-			</List>
-
+			</Grid>
 		</MuiBox>
 	);
 }

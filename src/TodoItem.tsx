@@ -6,7 +6,8 @@ import {
 	Checkbox,
 	FormControlLabel,
 	Grid,
-	Box as MuiBox
+	Box as MuiBox,
+	Typography
 } from "@mui/material";
 
 interface Todo {
@@ -44,12 +45,14 @@ interface ContextValue {
 
 type Properties = {
 	value: Todo,
-	onDelete: (id: string) => void
+	onDelete: (id: string) => void,
+	onChecked: (id: string) => void
 };
 
 function Component({
 	value,
-	onDelete
+	onDelete,
+	onChecked
 }: Properties) {
 	const [state, dispatch] = React.useReducer(reducer, initialState);
 	return (
@@ -59,11 +62,16 @@ function Component({
 					control=
 					{
 						<Checkbox
-							//onChange={ }
+							checked={value.completed}
+							onChange={() => onChecked(value.id)}
 							name={value.title}
 						/>
 					}
-					label={value.title}
+					label={<Typography
+						sx={value.completed ? { textDecoration: "line-through" } : {}}
+					>
+						{value.title}
+					</Typography>}
 				/>
 				<Button
 					variant="outlined"

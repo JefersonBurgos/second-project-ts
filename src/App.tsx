@@ -23,6 +23,7 @@ const initialState: State = {
 
 type Action =
 	{ type: "ADD_TODOS", payload: Todo } |
+	{ type: "UPDATE_TODO", payload: Todo[] } |
 	{ type: "DELETE_TODO", payload: Todo[] }
 	;
 
@@ -37,6 +38,14 @@ function reducer(state: State, action: Action): State {
 			break;
 		}
 
+		case "UPDATE_TODO": {
+			newState = {
+				...state,
+				todos: action.payload
+			};
+			break;
+		}
+
 		case "DELETE_TODO": {
 			newState = {
 				...state,
@@ -44,6 +53,7 @@ function reducer(state: State, action: Action): State {
 			};
 			break;
 		}
+
 		default:
 			newState = state;
 	}
@@ -72,6 +82,15 @@ function Component({
 				onChange={(todo: Todo) => dispatch({ type: "ADD_TODOS", payload: todo })}
 			/>
 			<TodoList
+
+				onChecked={(id: string) => dispatch({
+					type: "UPDATE_TODO",
+					payload: state.todos.map(item => {
+						return item.id === id ?
+							{ ...item, completed: !item.completed }
+							: item
+					})
+				})}
 				onDelete={(id: string) => dispatch({ type: "DELETE_TODO", payload: state.todos.filter(todo => todo.id != id) })}
 				todo={state.todos}
 			/>

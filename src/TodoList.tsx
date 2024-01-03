@@ -46,12 +46,14 @@ interface ContextValue {
 
 type Properties = {
 	todo: Todo[],
-	onDelete: (id: string) => void
+	onDelete: (id: string) => void,
+	onChecked: (id: string) => void
 };
 
 function Component({
 	todo,
-	onDelete
+	onDelete,
+	onChecked
 }: Properties) {
 	const [state, dispatch] = React.useReducer(reducer, initialState);
 	return (
@@ -59,7 +61,7 @@ function Component({
 			<Typography variant="h5">Todo List</Typography>
 			<Grid >
 				{todo.map((todo: Todo, index: number) => (
-					<TodoItem key={index} value={todo} onDelete={onDelete} />
+					<TodoItem onChecked={onChecked} key={index} value={todo} onDelete={onDelete} />
 				))}
 			</Grid>
 		</MuiBox>
